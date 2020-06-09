@@ -3,7 +3,7 @@ import {
   View
 } from 'react-native';
 
-import { RootStack } from './stack/RootStack';
+import RootStack from './stack/RootStack';
 
 const App = () => {
     return (

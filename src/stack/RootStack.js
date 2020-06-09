@@ -1,10 +1,14 @@
 import React from 'react';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import 'react-native-paper';
+
+import LoadingComponent from '../component/LoadingComponent';
+
+import LoginComponent from '../component/LoginComponent';
 
 import ContactComponent from '../component/ContactComponent';
-import LoginComponent from '../component/LoginComponent';
 import MessagesComponent from '../component/MessagesComponent';
 import NotificationComponent from '../component/NotificationComponent';
 
@@ -29,19 +33,16 @@ const Tabnavigator = createMaterialBottomTabNavigator({
     },
 })
 
-const Stacknavigator = createStackNavigator({
-    LoginScreen: {
-        screen: LoginComponent,
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    HomeScreen: {
-        screen: Tabnavigator,
-        navigationOptions: {
-            headerShown: false
-        }
-    }
-});
 
-export const Rororo = createAppContainer(Stacknavigator);
+export default createAppContainer(
+    createSwitchNavigator(
+        {
+            Loading: LoadingComponent,
+            Auth: LoginComponent,
+            App: Tabnavigator
+        }, 
+        {
+            initialRouteName: 'Loading'
+        }
+    )
+);
